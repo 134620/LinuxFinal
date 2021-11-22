@@ -6,24 +6,26 @@ import java.sql.Statement;
 
 public class App {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://124.70.163.104:3306/linux_final";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/linux_final";
     static final String USER = "root";
     static final String PASS = "Hhzzl1134663.";
+    static int id;
+    static String name;
+    static int age;
 
-    public static void main(String[] args) {
+    public App() {
         Connection conn = null;
         Statement stmt = null;
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "select * from t_student where id=4";
+            String sql = "SELECT * FROM t_student WHERE id =4";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-		int age = rs.getInt("age");
-		System.out.println("id:" + id + " name:" + name + " age:" + age);
+                id = rs.getInt("id");
+                name = rs.getString("name");
+                age = rs.getInt("age");
             }
             rs.close();
             stmt.close();
@@ -43,5 +45,8 @@ public class App {
             }
         }
     }
+
+
 }
+
 
